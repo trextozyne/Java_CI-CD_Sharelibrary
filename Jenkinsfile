@@ -12,6 +12,7 @@ pipeline{
         string(name: 'ImageName', description: "name of the docker build", defaultValue: 'javapp')
         string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
         string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'trex1987')
+        string(name: 'SonarQubecredentialsId', description: "name of the Application", defaultValue: 'sonarqube-api')
     }
 
     stages{
@@ -63,12 +64,13 @@ pipeline{
             steps{
                script{
 
-                   def SonarQubecredentialsId = 'sonarqube-api'
+                   def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
                    staticCodeAnalysis(SonarQubecredentialsId)
                }
             }
         }
 
+        // make sure to, sonarqube->administration->create(webhooks)->URL->http://server_ip:8080/sonarqube-webhook/
         stage('Quality Gate Status Check : Sonarqube'){
              when {
                  expression {
@@ -78,7 +80,7 @@ pipeline{
 
             steps{
                 script{
-                    def SonarQubecredentialsId = 'sonarqube-api'
+                    def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
                     QualityGateStatus(SonarQubecredentialsId)
                 }
             }
