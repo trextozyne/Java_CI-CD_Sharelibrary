@@ -11,6 +11,7 @@ public class MinikubeSampleApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		//
 	}
 
 }
