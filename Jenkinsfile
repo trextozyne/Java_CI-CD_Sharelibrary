@@ -9,7 +9,7 @@ pipeline{
         }
     }
     environment {
-            PATH = "/usr/bin/trivy:$PATH"
+            PATH = "/usr/bin:$PATH"
     }
 //     tools {
 //         maven 'mvn'
