@@ -8,6 +8,9 @@ pipeline{
           args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
         }
     }
+    environment {
+            PATH = "/usr/bin/trivy:$PATH"
+    }
 //     tools {
 //         maven 'mvn'
 //     }
