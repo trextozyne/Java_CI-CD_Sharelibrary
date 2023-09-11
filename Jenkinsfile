@@ -4,7 +4,7 @@ pipeline{
 
     agent {
         docker {
-          image 'trex1987/trexy-multi-stage-docker-agent:2.0'
+          image 'abhishekf5/maven-abhishek-docker-agent:v1'
           args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
         }
     }
