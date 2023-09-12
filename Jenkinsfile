@@ -26,7 +26,14 @@ pipeline{
     stages{
         stage('trivy test') {
             steps {
-                echo 'trivy --version'
+                script {
+                    def trivyVersion = sh(script: 'trivy --version', returnStatus: true)
+                    if (trivyVersion == 0) {
+                        echo "Trivy version: ${sh(script: 'trivy --version', returnStdout: true).trim()}"
+                    } else {
+                        error "Trivy is not installed or an error occurred."
+                    }
+                }
             }
         }
          
