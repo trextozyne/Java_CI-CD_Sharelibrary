@@ -25,6 +25,13 @@ pipeline{
 
     stages{
         stage('trivy test') {
+
+            agent {
+                docker {
+                    image 'aquasec/trivy'
+               }
+            }
+
             steps {
                 script {
                     def trivyVersion = sh(script: 'trivy --version', returnStatus: true)
