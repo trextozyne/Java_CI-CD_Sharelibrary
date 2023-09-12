@@ -36,7 +36,7 @@ pipeline{
                 }
             }
         }
-         
+
         stage('Git Checkout'){
             when {
                 expression {
@@ -52,7 +52,7 @@ pipeline{
         }
 
          stage('Unit Test maven'){
-         
+
              when {
                    expression {
                         params.action == 'create'
@@ -142,6 +142,12 @@ pipeline{
                 }
             }
 
+            agent {
+                docker {
+                    image 'aquasec/trivy'
+               }
+            }
+
             steps{
                script{
                    dockerImageScan("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
@@ -177,6 +183,6 @@ pipeline{
                    dockerImageCleanup("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
                }
             }
-        }      
+        }
     }
 }
