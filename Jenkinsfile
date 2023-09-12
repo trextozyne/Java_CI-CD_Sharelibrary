@@ -24,6 +24,11 @@ pipeline{
     }
 
     stages{
+        stage('trivy test') {
+            steps {
+                echo 'trivy --version'
+            }
+        }
          
         stage('Git Checkout'){
             when {
