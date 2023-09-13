@@ -3,11 +3,15 @@
 pipeline{
 
     agent {
-        docker {
-          image 'abhishekf5/maven-abhishek-docker-agent:v1'
-          args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-        }
+        node { label 'trex1987/maven-trivy-agent:v1' }
+//         docker {
+//           image 'abhishekf5/maven-abhishek-docker-agent:v1'
+//           args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+//         }
     }
+//     triggers {
+//         pollSCM '*/5****' //Randomly poll repo every 5 minutes crontab
+//     }
 //     environment {
 //             PATH = "/usr/bin:$PATH"
 //     }
@@ -150,13 +154,13 @@ pipeline{
                 }
             }
 
-            agent {
-                docker {
-                    image 'aquasec/trivy'
-                    args '--entrypoint=""' // Disable the entrypoint
-//                     args ['-c', 'trivy', '--exit-code', '1', '--no-progress']
-               }
-            }
+//             agent {
+//                 docker {
+//                     image 'aquasec/trivy'
+//                     args '--entrypoint=""' // Disable the entrypoint
+// //                     args ['-c', 'trivy', '--exit-code', '1', '--no-progress']
+//                }
+//             }
 
             steps{
                script{
