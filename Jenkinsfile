@@ -26,12 +26,12 @@ pipeline{
     stages{
         stage('trivy test') {
 
-//             agent {
-//                 docker {
-//                     image 'aquasec/trivy'
-//                     args '--entrypoint=""' // Disable the entrypoint
-//                }
-//             }
+            agent {
+                docker {
+                    image 'aquasec/trivy'
+                    args '--entrypoint=""' // Disable the entrypoint
+               }
+            }
 
             steps {
                 script {
@@ -150,12 +150,13 @@ pipeline{
                 }
             }
 
-//             agent {
-//                 docker {
-//                     image 'aquasec/trivy'
+            agent {
+                docker {
+                    image 'aquasec/trivy'
 //                     args '--entrypoint=""' // Disable the entrypoint
-//                }
-//             }
+                    args '--exit-code 1 --no-progress' // Specify Trivy arguments here
+               }
+            }
 
             steps{
                script{
