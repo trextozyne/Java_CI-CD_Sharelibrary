@@ -3,7 +3,7 @@
 pipeline{
 
     agent {
-        node { label 'docker-trivy-maven-alpine-000172lhq3lz2' }
+        node { label 'docker-trivy-maven-alpine' }
 //         docker {
 //           image 'abhishekf5/maven-abhishek-docker-agent:v1'
 //           args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
