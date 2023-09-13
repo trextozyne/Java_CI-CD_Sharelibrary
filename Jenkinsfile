@@ -26,12 +26,12 @@ pipeline{
     stages{
         stage('trivy test') {
 
-            agent {
-                docker {
-                    image 'aquasec/trivy'
-                    args '--entrypoint=""' // Disable the entrypoint
-               }
-            }
+//             agent {
+//                 docker {
+//                     image 'aquasec/trivy'
+//                     args '--entrypoint=""' // Disable the entrypoint
+//                }
+//             }
 
             steps {
                 script {
