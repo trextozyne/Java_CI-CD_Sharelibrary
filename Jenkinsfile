@@ -30,18 +30,19 @@ pipeline{
     stages{
         stage('trivy test') {
 
-            agent {
-                docker {
-                    image 'aquasec/trivy'
-                    args '--entrypoint=""' // Disable the entrypoint
-               }
-            }
+//             agent {
+//                 docker {
+//                     image 'aquasec/trivy'
+//                     args '--entrypoint=""' // Disable the entrypoint
+//                }
+//             }
 
             steps {
                 script {
                     def trivyVersion = sh(script: 'trivy --version', returnStatus: true)
                     if (trivyVersion == 0) {
                         echo "Trivy version: ${sh(script: 'trivy --version', returnStdout: true).trim()}"
+                        echo "Docker version: ${sh(script: 'docker --version', returnStdout: true).trim()}"
                     } else {
                         error "Trivy is not installed or an error occurred."
                     }
