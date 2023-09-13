@@ -155,7 +155,7 @@ pipeline{
                     image 'aquasec/trivy'
 //                     args '--entrypoint=""' // Disable the entrypoint
                     // Specify Trivy command and options as the entry point
-                    args '-c', 'trivy --exit-code 1 --no-progress'
+                    args ['-c', 'trivy', '--exit-code', '1', '--no-progress']
                }
             }
 
