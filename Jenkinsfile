@@ -154,7 +154,7 @@ pipeline{
                 docker {
                     image 'aquasec/trivy'
 //                     args '--entrypoint=""' // Disable the entrypoint
-                    args '-c', 'trivy', '--exit-code', '1', '--no-progress'
+                    args ['-c', 'trivy', '--exit-code', '1', '--no-progress']
                }
             }
 
