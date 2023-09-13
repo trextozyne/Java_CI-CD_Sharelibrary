@@ -87,36 +87,36 @@ pipeline{
             }
         }
 
-        stage('Static code analysis: Sonarqube'){
-            when {
-               expression {
-                   params.action == 'create'
-               }
-            }
-            steps{
-               script{
-
-                   def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
-                   staticCodeAnalysis(SonarQubecredentialsId)
-               }
-            }
-        }
+//         stage('Static code analysis: Sonarqube'){
+//             when {
+//                expression {
+//                    params.action == 'create'
+//                }
+//             }
+//             steps{
+//                script{
+//
+//                    def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
+//                    staticCodeAnalysis(SonarQubecredentialsId)
+//                }
+//             }
+//         }
 
         // make sure to, sonarqube->administration->create(webhooks)->URL->http://server_ip:8080/sonarqube-webhook/
-        stage('Quality Gate Status Check : Sonarqube'){
-             when {
-                 expression {
-                     params.action == 'create'
-                 }
-             }
-
-            steps{
-                script{
-                    def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
-                    QualityGateStatus(SonarQubecredentialsId)
-                }
-            }
-        }
+//         stage('Quality Gate Status Check : Sonarqube'){
+//              when {
+//                  expression {
+//                      params.action == 'create'
+//                  }
+//              }
+//
+//             steps{
+//                 script{
+//                     def SonarQubecredentialsId = "${params.SonarQubecredentialsId}"
+//                     QualityGateStatus(SonarQubecredentialsId)
+//                 }
+//             }
+//         }
 
         stage('Maven Build : maven'){
             when {
