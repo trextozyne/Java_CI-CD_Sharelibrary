@@ -3,11 +3,11 @@
 pipeline{
 
     agent {
-        node { label 'docker-trivy-maven-alpine' }
-//         docker {
-//           image 'abhishekf5/maven-abhishek-docker-agent:v1'
-//           args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-//         }
+//         node { label 'docker-trivy-maven-alpine' }
+        docker {
+          image 'trex1987/maven-trivy-docker-agent:v1'
+          args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+        }
     }
 //     triggers {
 //         pollSCM '*/5****' //Randomly poll repo every 5 minutes crontab
