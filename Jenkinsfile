@@ -2,7 +2,7 @@
 
 pipeline{
 
-    agent {
+    agent { //570163
         node { label 'docker-agent' }
 //         docker {
 //           image 'abhishekf5/maven-abhishek-docker-agent:v1'
@@ -119,6 +119,18 @@ pipeline{
 //             }
 //         }
 
+        stage("OWASP Dependency Check"){
+            when {
+                expression {
+                    params.action == 'create'
+                }
+            }
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
         stage('Maven Build : maven'){
             when {
                 expression {
@@ -199,5 +211,17 @@ pipeline{
                }
             }
         }
+
+//         stage("Deploy Using Docker"){
+//             steps{
+//                 sh " docker run -d --name pet1 -p 8082:8082 writetoritika/pet-clinic123:latest "
+//             }
+//         }
+
+            stage("Deploy To ENV:Maven"){
+                steps{
+                    sh "cp  /var/lib/jenkins/workspace/Real-World-CI-CD/target/petclinic.war /opt/apache-tomcat-9.0.65/webapps/ "
+                }
+            }
     }
 }
