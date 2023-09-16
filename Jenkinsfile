@@ -2,7 +2,7 @@
 
 pipeline{
 
-    agent { //570163
+    agent {//570163
         node { label 'docker-agent' }
 //         docker {
 //           image 'abhishekf5/maven-abhishek-docker-agent:v1'
@@ -43,6 +43,7 @@ pipeline{
                     if (trivyVersion == 0) {
                         echo "Trivy version: ${sh(script: 'trivy --version', returnStdout: true).trim()}"
                         echo "Docker version: ${sh(script: 'docker --version', returnStdout: true).trim()}"
+                        echo "Docker version: ${sh(script: 'docker info', returnStdout: true).trim()}"
                     } else {
                         error "Trivy is not installed or an error occurred."
                     }
